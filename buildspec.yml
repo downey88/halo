@@ -6,11 +6,9 @@ phases:
             nodejs: latest
         commands:
             - echo "Installing sample NodeJS Application..."
-            - npm install -g calculator
     pre_build:
         commands: 
             - echo "Installing source NPM dependencies..."
-            - npm install
     build:
         commands:
             - echo "Build started..."
