@@ -15,5 +15,5 @@ phases:
             - echo "Compiling the calculator.js code"
     post_build:
         commands:
-            - echo "Build completed..."
+            - echo "Build completed"
             
