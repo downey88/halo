@@ -16,4 +16,5 @@ phases:
     post_build:
         commands:
             - echo "Build completed"
+            - echo "Exiting..."
             
