@@ -19,6 +19,10 @@ jobs:
         role-to-assume: arn:aws:iam::467263176655:role/DCodeDeployRoleForGitActions
         role-session-name: DCodeDeployRoleForGitActions
         aws-region: ${{ env.AWS_REGION }}
+    - name: Install Dependencies
+      run: sudo apt update && sudo apt upgrade -y \
+        npm install
+      
     # Upload a file to AWS s3
     #- name:  Copy index.html to s3
     #  run: |
