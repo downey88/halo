@@ -1,29 +1,44 @@
 name: AWS example workflow
 
-on: [pull_request_target, push]
+on: 
+  push:
+    branches:
+      - master
 
 env:
   AWS_REGION : "ap-southeast-1"
   
-permissions:
-  id-token: write
-  contents: read 
+#permissions:
+#  id-token: write
+#  contents: read 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Git clone the repository
-      uses: actions/checkout@v3
-    - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        role-to-assume: arn:aws:iam::467263176655:role/DCodeDeployRoleForGitActions
-        role-session-name: DCodeDeployRoleForGitActions
-        aws-region: ${{ env.AWS_REGION }}
-    - name: Install Dependencies
-      run: sudo apt update && sudo apt upgrade -y \
-        npm install 
+  deploy:
+    name: Deploy to EC2 on Master Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
         
-    # Upload a file to AWS s3
-    #- name:  Copy index.html to s3
-    #  run: |
-    #    aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
+      - name: Deploy to ec2-autoscaling-amznlnx2-testing on Singapore Region
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_AWSSingapore }}
+          REMOTE_HOST: ${{ secrets.DNS_NAME }}
+          REMOTE_USER: ${{ secrets.USRNAME }}
+          TARGET: ${{ secrets.DIR_TARGET }}
+          
+      - name: Install Dependencies
+        run: sudo apt update && sudo apt upgrade -y \
+            npm install
+          
+     # - name: configure aws credentials
+     #   uses: aws-actions/configure-aws-credentials@v1
+     #   with:
+     #     role-to-assume: arn:aws:iam::467263176655:role/DCodeDeployRoleForGitActions
+     #     role-session-name: DCodeDeployRoleForGitActions
+     #     aws-region: ${{ env.AWS_REGION }}
+ 
+      # Upload a file to AWS s3
+      #- name:  Copy index.html to s3
+      #  run: |
+      #    aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
