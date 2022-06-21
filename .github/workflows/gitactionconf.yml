@@ -1,6 +1,6 @@
 name: AWS example workflow
 
-on: [pull_request_target, push]
+on: [push
 
 env:
   AWS_REGION : "ap-southeast-1"
