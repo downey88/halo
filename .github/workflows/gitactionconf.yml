@@ -1,6 +1,6 @@
 name: AWS example workflow
 
-on: [push
+on: [pull_request_target, push]
 
 env:
   AWS_REGION : "ap-southeast-1"
@@ -21,10 +21,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
     - name: Install Dependencies
       run: sudo apt update && sudo apt upgrade -y \
-        npm install \
-        
-        # making error
-        skjdbfhabfhbsahfbkasbfk 
+        npm install 
         
     # Upload a file to AWS s3
     #- name:  Copy index.html to s3
