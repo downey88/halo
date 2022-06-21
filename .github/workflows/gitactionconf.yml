@@ -21,8 +21,11 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
     - name: Install Dependencies
       run: sudo apt update && sudo apt upgrade -y \
-        npm install
-      
+        npm install \
+        
+        # making error
+        skjdbfhabfhbsahfbkasbfk 
+        
     # Upload a file to AWS s3
     #- name:  Copy index.html to s3
     #  run: |
