@@ -31,8 +31,6 @@ jobs:
         run: sudo apt update && sudo apt upgrade -y \
             npm install
             
-    # Error Testing
-    halo-halo 
      # - name: configure aws credentials
      #   uses: aws-actions/configure-aws-credentials@v1
      #   with:
