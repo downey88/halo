@@ -1,2 +1,3 @@
-ini line 1
-ini line 2
+Ini adalah 
+code dari
+dev_2
